@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Kalkulator Wynagrodzenia",
+  "name": "Oblicz Wypłatę",
   "icons": [
     {
       "src": "favicon.ico",
