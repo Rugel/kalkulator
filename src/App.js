@@ -56,14 +56,8 @@ var arr=[];
 for(const el of obl) {
 arr.push(el)};
 
- if(obl<2e30){
-   arr[arr.length-4]+=" " ;
-   arr[arr.length-7]+=" ";
-   arr[arr.length-10]+=" ";
-   arr[arr.length-13]+=" ";
-   arr[arr.length-16]+=" ";
-   arr[arr.length-19]+=" ";
-  } 
+ for(var k=4; k<=arr.length; k+=3)
+   {arr[arr.length-k]+=" "}
 
                 
                 const Wynik = ()=> {  return(<h3 className="wynik">Twoja wypłata powinna wynieść:<br/><span style={{color:'#FD3C37', fontSize:'1.5em',letterSpacing:'3px'}}>{arr}</span> PLN</h3>)}
