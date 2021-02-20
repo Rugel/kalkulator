@@ -13,7 +13,21 @@ class App extends React.Component
             illnessweekenddays:0,
             avaragehours:168,
             avaragemoney:4500,
-            isConfirmed :false,          }
+            isConfirmed :false,
+            temp :"",
+            wiatr:"",
+            stan:"",
+            cisnienie:"",
+            icon:"",
+            time:"",
+            }     
+            
+    componentDidMount(){
+     fetch('https://api.openweathermap.org/data/2.5/weather?q=warszawa&units=metric&lang=pl&appid=04a91b73b71a422b152e409612f46049')
+      .then(response=>response.json())
+       .then(dane=>this.setState({temp:dane.main.temp, wiatr:dane.wind.speed, stan:dane.weather[0].description, cisnienie:dane.main.pressure, icon:dane.weather[0].icon, time:new Date(dane.dt*1000).toLocaleTimeString()})
+       )
+    }
                        handleChangeGodziny=(e)=>{this.setState({hours:e.target.value})}  
                        
     handleChangeStawka=(e)=>{this.setState({stawka:e.target.value})}
@@ -44,12 +58,12 @@ class App extends React.Component
      const {hours, stawka, satsun, hollydays, illnessworkdays, illnessweekenddays, avaragehours, avaragemoney }=this.state;
      
      
-                    const wyliczenie =()=>{return (1200+hours * stawka+nadgodz*stawka*0.5 + satsun *stawka*0.5+hollydays *8*avaragemoney/avaragehours/0.7-40*hollydays+illnessworkdays*avaragemoney/30/0.7*0.8-40*illnessworkdays + illnessweekenddays*avaragemoney/30/0.7*0.8-40*illnessweekenddays )*0.98*0.709639;
+                    const wyliczenie =()=>{return (1200+hours * stawka+nadgodz*stawka*0.5 + satsun *stawka*0.5+hollydays *8*avaragemoney/avaragehours/0.7-40*hollydays+illnessworkdays*avaragemoney/30/0.7*0.8-40*illnessworkdays + illnessweekenddays*avaragemoney/30/0.7*0.8-40*illnessweekenddays )*0.691439;
      
              }
     let wyl=wyliczenie();
     if(wyl<0) {wyl=0};
-   if(this.state.isConfirmed) {wyl=wyl-0.1928*wyl};
+    if(this.state.isConfirmed) {wyl=wyl-0.1928*wyl};
     wyl=Math.round(wyl);
     var obl=wyl.toString();
     var arr=[];
@@ -59,7 +73,7 @@ class App extends React.Component
     for(var k=4; k<=arr.length; k+=3)
        {arr[arr.length-k]+=" " }
                 
-                    const Wynik = ()=> {return(<h3 className="wynik">Twoja wypłata powinna wynieść:<br/><span style={{color:'#FD3C37', fontSize:'1.5em',letterSpacing:'3px'}}>{arr}</span> PLN</h3>)}
+                    const Wynik = ()=> {return(<h3 className="wynik">Twoja wypłata powinna wynieść:<br/><span style={{color:'#FD5B35', fontSize:'1.5em',letterSpacing:'3px'}}>{arr}</span> PLN</h3>)}
                     
     const data=new Date();
     const year=data.getFullYear();
@@ -116,7 +130,7 @@ class App extends React.Component
                      <label><li>
      Podaj twoją stawkę godzinową<br/><input className="input" type="number" onChange ={this.handleChangeStawka}/></li><br/></label>
      
-      <label><li>Podaj liczbę dni roboczych danego miesiąca<br/><input className="input" type="number" onChange={this.handleChangeWorkdays}/></li><br/></label>   
+      <label><li>Podaj liczbę dni roboczych danego miesiąca<br/><input className="input" type="number" placeholder="21" onChange={this.handleChangeWorkdays}/></li><br/></label>   
       
         <label><li>Podaj łączną liczbę godzin przepracowanych w soboty, niedziele i święta<br/><input className="input" type="number" onChange={this.handleChangeSatsun}/></li><br/></label>
       
@@ -127,9 +141,9 @@ class App extends React.Component
      
      <label><li>Podaj ilość dni wolnych od pracy a przebytych na zwolnieniu lekarskim<br/><input className="input" type="number" onChange={this.handleChangeCh2}/></li><br/></label>
      
-     <label><li>Podaj liczbę godzin uśrednioną z trzech ostatnich miesięcy<br/><input className="input" type="number" onChange={this.handleChangeSrGodz}/></li><br/></label>
+     <label><li>Podaj liczbę godzin uśrednioną z trzech ostatnich miesięcy<br/><input className="input" type="number" placeholder="168" onChange={this.handleChangeSrGodz}/></li><br/></label>
      
-      <label><li>Podaj kwotę wypłaty uśrednioną z trzech ostatnich miesięcy<br/><input className="input" type="number" onChange={this.handleChangeSrWyp}/></li><br/></label>
+      <label><li>Podaj kwotę wypłaty uśrednioną z trzech ostatnich miesięcy<br/><input className="input" type="number" placeholder="4500" onChange={this.handleChangeSrWyp}/></li><br/></label>
     
     
        <label><input type='checkbox' id="box" onChange ={this.handleChangeConfirm} checked={this.state.isConfirmed}/>zaznacz jeśli "wpadłeś" w drugi próg podatkowy</label><br/> <br/>        
@@ -137,7 +151,7 @@ class App extends React.Component
       
       </ol>
              
-         <div id="footer">{day} {miesiac} {year} - wyk. Grzegorz Dychała</div>  
+         <div id="footer"><br/>Aktualna pogoda dla Warszawy (<span style={{color:"black", fontWeight:"100"}}>{this.state.time}</span>):<br/> 🌡️temp.: <span>{this.state.temp} &#176;C</span> 💨wiatr: <span>{this.state.wiatr} m/s</span><br/>⛱️stan: <span>{this.state.stan}</span> ⏲️ciśnienie: <span>{this.state.cisnienie} hPa</span><br/><img src={`https://openweathermap.org/img/wn/${this.state.icon}@2x.png`} alt="icon"/><br/>{day} {miesiac} {year} - &copy; Grzegorz Dychała</div>  
     </div>
                   
                      
