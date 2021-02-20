@@ -54,8 +54,8 @@ height:1.5em;
   padding:10px;
   box-shadow:0px 0px 15px;
   text-shadow:3px 3px 5px grey;
-  border-bottom:double 8px #FD3C37;
-  border-top:double 8px #FD3C37;
+  border-bottom:double 8px #FD5B35 ;
+  border-top:double 8px #FD5B35;
   background-image: linear-gradient(to right,black -3%, #54AD00, #94FD37, #90FF50,   #AAFFAA, #90FF50, #94FD37, #54AD00, black);
 }
 
@@ -81,5 +81,14 @@ ol{
 #box{
   width:2em;
   height:2em;
+}
+span{
+  font-weight:bold;
+  color:#FD5B35;
+  letter-spacing:1px;
+}
+img{
+  width:5.5em;
+  margin-top:-1em;
 }
 

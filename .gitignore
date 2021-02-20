@@ -8,16 +8,9 @@
 # testing
 /coverage
 
-<<<<<<< HEAD
 # build
 build
 
-=======
-#build
-build
-
-
->>>>>>> f375b8487b5fb23c59e99d6534e3b4ab19d03849
 # misc
 .DS_Store
 .env.local
