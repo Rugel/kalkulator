@@ -14,12 +14,12 @@ class App extends React.Component
             avaragehours:168,
             avaragemoney:4500,
             isConfirmed :false,
-            temp :"",
-            wiatr:"",
-            stan:"",
-            cisnienie:"",
+            temp:"brak danych",
+            wiatr:"brak danych",
+            stan:"brak danych",
+            cisnienie:"brak danych",
             icon:"",
-            time:"",
+            time:"brak danych",
             }     
             
     componentDidMount(){
