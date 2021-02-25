@@ -40,6 +40,12 @@ height:1.5em;
  border-radius:8px;
  outline:none;
  letter-spacing:3px;
+ transition:.5s;
+}
+.input:hover{
+  font-size:1.5em;
+  background-color:#fff;
+  cursor:pointer;
 }
 .wynik{
   margin:auto;
@@ -89,6 +95,7 @@ span{
 }
 img{
   width:5.5em;
+  height: 5.5em;
   margin-top:-1em;
 }
 
