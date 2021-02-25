@@ -65,7 +65,7 @@ class App extends React.Component
     
     handleChangeConfirm =()=>{this.setState({isConfirmed :!this.state.isConfirmed})}
     
-    handleChangeCity=(e)=>{if(e.target.value.length>0){this.setState({city:e.target.value})}else{this.setState({city:"Warszawa"})}}
+    handleChangeCity=(e)=>{if(e.target.value.length>2){this.setState({city:e.target.value})}else{this.setState({city:"Warszawa"})}}
     
     
                             
