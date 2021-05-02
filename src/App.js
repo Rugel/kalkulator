@@ -84,13 +84,14 @@ handleChangeConfirm =()=>{this.setState({isConfirmed :!this.state.isConfirmed})}
 
 handleChangeCity=(e)=>{if(e.target.value.length>0){this.setState({city:e.target.value,active:false})}else{this.setState({city:"Warszawa",active:true})}}
 
-handleClickLocal=()=>{
-// eslint-disable-next-line no-func-assign
-showPosition=showPosition.bind(this);
+handleClickLocal=(e)=>{
+     var showPosition=function(position){this.setState({lat:position.coords.latitude, lon:position.coords.longitude,active:true});
+}
+ showPosition = showPosition.bind(this);   
+     
 if (navigator.geolocation) { navigator.geolocation.getCurrentPosition(showPosition);
 }
-function showPosition(position){  this.setState({lat:position.coords.latitude, lon:position.coords.longitude,active:true});
-}
+ 
 }
 
                     
