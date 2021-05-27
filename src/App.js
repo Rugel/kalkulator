@@ -32,6 +32,7 @@ class App extends React.Component
     nasa:"",
     title:"",
     media_type:"",
+    nasa_vid:"",
     }     
     
 componentDidMount(){
@@ -48,7 +49,7 @@ fetch(`https://api.openweathermap.org/data/2.5/weather?q=${this.state.city}&unit
 
 componentDidUpdate(prevProps,prevState){
 if(prevState.active !== this.state.active||prevState.lat !==this.state.lat){
-fetch(`http://api.openweathermap.org/data/2.5/weather?lat=${this.state.lat}&lon=${this.state.lon}&units=metric&lang=pl&appid=8cd238073b54d7ce90d3163bb612c7cb`)
+fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${this.state.lat}&lon=${this.state.lon}&units=metric&lang=pl&appid=8cd238073b54d7ce90d3163bb612c7cb`)
 .then(response=>response.json())
 .then(dane=>this.setState({cityOk:dane.name,temp:dane.main.temp,wiatr:dane.wind.speed,stan:dane.weather[0].description,cisnienie:dane.main.pressure,visibility:dane.visibility,clouds:dane.clouds.all,icon:dane.weather[0].icon,time:new Date(dane.dt*1000).toLocaleTimeString(), country:dane.sys.country})
 )
@@ -116,9 +117,8 @@ var ob=wyl.toString();
 var obl=ob.replace(/\B(?=(\d{3})+(?!\d))/g, " ");
 
 
-
-        
-            const Wynik = ()=> {return(<h3 className="wynik">Twoja wypłata powinna wynieść:<br/><span style={{color:'#FD5B35', fontSize:'1.5em',letterSpacing:'3px'}}>{obl}</span> PLN</h3>)}
+          const Nasa = ()=>{if(this.state.media_type==="video"){return(<iframe title="iframe" frameBorder="0" allowFullScreen="allowFullscreen" width="100%" height="100%" src={this.state.nasa_vid}></iframe>)}else{return(<img src={this.state.nasa} alt="FOTKA" style={{width:"95%", height:"95%"}}/>)}}
+          const Wynik = ()=> {return(<h3 className="wynik">Twoja wypłata powinna wynieść:<br/><span style={{color:'#FD5B35', fontSize:'1.5em',letterSpacing:'3px'}}>{obl}</span> PLN</h3>)}
             
 const data=new Date();
 const year=data.getFullYear();
@@ -201,7 +201,7 @@ Podaj twoją stawkę godzinową<br/><input className="input" type="number" onCha
 
 
      
- <div id="footer"><br/>Aktualna pogoda dla miasta <span style={{color:"#0000FF"}}>{this.state.cityOk} - {this.state.country}</span> (<span style={{color:"black", fontWeight:"100"}}>{this.state.time}</span>):<br/> 🌡️temp.: <span>{this.state.temp} &#176;C</span> 💨wiatr: <span>{this.state.wiatr} m/s</span><br/>⛱️stan: <span>{this.state.stan}</span> ⏲️ciśnienie: <span>{this.state.cisnienie} hPa</span><br/>👁️widoczność: <span>{this.state.visibility} m</span> ⛅zachmurzenie:  <span>{this.state.clouds} %</span><br/><img className="img" src={`https://openweathermap.org/img/wn/${this.state.icon}@2x.png`} alt="icon"/><br/><div style={{textAlign:"right",marginRight:"2%"}}><em>Wrzutka Dnia od </em><img className="img" style={{marginBottom:"-0.75em",width:"3.5em",height:"3.5em"}} src="https://drive.google.com/uc?id=1rwQwD3c8ppQ2p2ALj-PlOidJ3Sfo0_ro" alt="NASA"/></div><label><img src={this.state.nasa} alt="FOTKA" style={{width:"95%", height:"95%"}}/><br/><div style={{color:"#00F",fontSize:"1.3em",textAlign:"left",marginLeft:"2.5%"}}><em>{this.state.title}</em></div></label><br/>{day} {miesiac} {year} - &copy; Grzegorz Dychała</div>
+ <div id="footer"><br/>Aktualna pogoda dla miasta <span style={{color:"#0000FF"}}>{this.state.cityOk} - {this.state.country}</span> (<span style={{color:"black", fontWeight:"100"}}>{this.state.time}</span>):<br/> 🌡️temp.: <span>{this.state.temp} &#176;C</span> 💨wiatr: <span>{this.state.wiatr} m/s</span><br/>⛱️stan: <span>{this.state.stan}</span> ⏲️ciśnienie: <span>{this.state.cisnienie} hPa</span><br/>👁️widoczność: <span>{this.state.visibility} m</span> ⛅zachmurzenie:  <span>{this.state.clouds} %</span><br/><img className="img" src={`https://openweathermap.org/img/wn/${this.state.icon}@2x.png`} alt="icon"/><br/><div style={{textAlign:"right",marginRight:"2%"}}><em>Wrzutka Dnia od </em><img className="img" style={{marginBottom:"-0.75em",width:"3.5em",height:"3.5em"}} src="https://drive.google.com/uc?id=1rwQwD3c8ppQ2p2ALj-PlOidJ3Sfo0_ro" alt="NASA"/></div><label><Nasa/><div style={{color:"#00F",fontSize:"1.3em",textAlign:"left",marginLeft:"2.5%"}}><em>{this.state.title}</em></div></label><br/>{day} {miesiac} {year} - &copy; Grzegorz Dychała</div>
 </div>
           
              
