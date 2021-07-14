@@ -39,14 +39,13 @@ componentDidMount(){
 
 fetch("https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY")
 .then(response=>response.json())
-.then(dane=>this.setState({nasa:dane.hdurl,title:dane.title}));
+.then(dane=>this.setState({nasa:dane.hdurl,title:dane.title,media_type:dane.media_type,nasa_vid:dane.url}));
 fetch(`https://api.openweathermap.org/data/2.5/weather?q=${this.state.city}&units=metric&lang=pl&appid=04a91b73b71a422b152e409612f46049`)
 .then(response=>response.json())
 .then(dane=>this.setState({temp:dane.main.temp, wiatr:dane.wind.speed, stan:dane.weather[0].description, cisnienie:dane.main.pressure, visibility:dane.visibility, clouds:dane.clouds.all, icon:dane.weather[0].icon, time:new Date(dane.dt*1000).toLocaleTimeString()})
 )
 
 }
-
 componentDidUpdate(prevProps,prevState){
 if(prevState.active !== this.state.active||prevState.lat !==this.state.lat){
 fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${this.state.lat}&lon=${this.state.lon}&units=metric&lang=pl&appid=8cd238073b54d7ce90d3163bb612c7cb`)
@@ -118,7 +117,7 @@ var obl=ob.replace(/\B(?=(\d{3})+(?!\d))/g, " ");
 
 
           const Nasa = ()=>{if(this.state.media_type==="video"){return(<iframe title="iframe" frameBorder="0" allowFullScreen="allowFullscreen" width="100%" height="100%" src={this.state.nasa_vid}></iframe>)}else{return(<img src={this.state.nasa} alt="FOTKA" style={{width:"95%", height:"95%"}}/>)}}
-          const Wynik = ()=> {return(<h3 className="wynik">Twoja wypłata powinna wynieść:<br/><span style={{color:'#FD5B35', fontSize:'1.5em',letterSpacing:'3px'}}>{obl}</span> PLN</h3>)}
+          const Wynik = ()=> {return(<h2 className="wynik">Twoja wypłata powinna wynieść:<br/><span style={{color:'#FD5B35', fontSize:'1.5em',letterSpacing:'3px'}}>{obl}</span> PLN</h2>)}
             
 const data=new Date();
 const year=data.getFullYear();
@@ -167,7 +166,7 @@ break;
               
              
         <Wynik/><br/><br/><br/>
-             <div id="tytul"><h2>Kalkulator Wynagrodzenia</h2><p>NETTO<br/>(z uwzg. standardowego uczestnictwa w PPK)</p></div>
+             <div id="tytul"><h1>Kalkulator Wynagrodzenia</h1><p>NETTO<br/>(z uwzg. standardowego uczestnictwa w PPK)</p></div>
              <ol>
                  
              <label><li>Podaj łączną liczbę przepracowanych godzin w danym miesiącu<br/><input className="input" type="number" onChange={this.handleChangeGodziny}/></li> <br/></label>
