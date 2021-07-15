@@ -37,7 +37,7 @@ class App extends React.Component
     
 componentDidMount(){
 
-fetch("https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY")
+fetch("https://api.nasa.gov/planetary/apod?api_key=TAIEBXrtT4oGNEobufjhEvUJg332acBbAmf9hKL3")
 .then(response=>response.json())
 .then(dane=>this.setState({nasa:dane.hdurl,title:dane.title,media_type:dane.media_type,nasa_vid:dane.url}));
 fetch(`https://api.openweathermap.org/data/2.5/weather?q=${this.state.city}&units=metric&lang=pl&appid=04a91b73b71a422b152e409612f46049`)
