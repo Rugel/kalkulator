@@ -166,7 +166,7 @@ break;
               
              
         <Wynik/><br/><br/><br/>
-             <div id="tytul"><h1>Kalkulator Wynagrodzenia</h1><p>NETTO<br/>(z uwzg. standardowego uczestnictwa w PPK)</p></div>
+             <div id="tytul"><h1 style={{fontSize:"1.7em"}}>Kalkulator Wynagrodzenia</h1><h3 style={{fontSize:".8em"}}>NETTO<br/>(z uwzg. standardowego uczestnictwa w PPK)</h3></div>
              <ol>
                  
              <label><li>Podaj łączną liczbę przepracowanych godzin w danym miesiącu<br/><input className="input" type="number" onChange={this.handleChangeGodziny}/></li> <br/></label>
